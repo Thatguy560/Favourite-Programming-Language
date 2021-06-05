@@ -1,9 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import FavouriteLanguage from "./FavouriteLanguage";
 
-test("renders learn react link", () => {
+test("renders intro text when app loads", () => {
   render(<FavouriteLanguage />);
-  const linkElement = screen.getByText(/learn react/i);
+  const linkElement = screen.getByText(
+    /What is your favourite programming language?/i
+  );
   expect(linkElement).toBeInTheDocument();
 });
 

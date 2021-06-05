@@ -2,9 +2,9 @@
 
 <!-- To add GIF Image -->
 
-<p align="center">
+<!-- <p align="center">
   <img src="NewDemoOfApp.gif" alt="animated" />
-</p>
+</p> -->
 
 <!-- App Description   -->
 
@@ -40,7 +40,7 @@ You can find the deployed app on Heroku via the following link:  -->
 
 1. Clone this repository
 
-2. type "git clone https://github.com/Thatguy560/Character-counter" in the terminal
+2. type "git clone " in the terminal
 
 3. cd into '' (Change directory's)
 
