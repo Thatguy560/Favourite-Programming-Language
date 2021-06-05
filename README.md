@@ -29,9 +29,6 @@ so I can see what someones favourite language is
 I'd like to display the selected users favourite programming language.
 ```
 
-
-
-
 <!-- # Visit the deployed app
 
 You can find the deployed app on Heroku via the following link:  -->
