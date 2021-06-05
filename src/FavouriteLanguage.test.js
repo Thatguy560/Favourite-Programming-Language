@@ -9,5 +9,4 @@ test("renders intro text when app loads", () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-// Tests still work (Once app is finished with, attempt
-// to make some of your tests with the app. )
+// https://api.github.com/users/${username}/repos?per_page=100

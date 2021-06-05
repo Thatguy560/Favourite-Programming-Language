@@ -8,28 +8,35 @@ class FavouriteLanguage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      searchedUsername: "",
       programmingLanguages: [],
     };
   }
 
-  // Have an input field where you can type in the Github username
-  // you're looking for
+  searchGithubUsers = (event) => {
+    this.setState({ searchedUsername: event.target.value });
+  };
 
-  // Will get it to retrieve from API first and then change this after
-  getData = () => {
+  getData = (event) => {
+    event.preventDefault();
+    let url = `https://api.github.com/users/${this.state.searchedUsername}/repos?per_page=100`;
+    console.log(url);
     axios
-      .get(`https://api.github.com/users/thatguy560/repos?per_page=100`)
+      .get(url)
       .then((res) => {
-        const programmingLanguagesList = res.data;
-        console.log(
-          programmingLanguagesList
-            .map((lang) => lang.language)
-            .filter((lang) => lang === "JavaScript")
-        );
+        const allData = res.data;
+        const programmingLanguagesUsed = allData.map((lang) => lang.language);
+        console.log(programmingLanguagesUsed);
       })
       .catch((error) => {
-        console.log("ERROR");
+        console.log(this.DisplayErrorInfo(error));
       });
+  };
+
+  DisplayErrorInfo = (error) => {
+    return error.response.status === 404
+      ? "404 Github Username Not Found"
+      : "Something Went Wrong";
   };
 
   render() {
@@ -38,6 +45,14 @@ class FavouriteLanguage extends Component {
         <header className="App-header">
           <h1>What is your favourite programming language?</h1>
           <p>Please enter a valid Github username:</p>
+          <form onSubmit={this.getData}>
+            <input
+              type="text"
+              placeholder="Github username..."
+              value={this.state.searchedUsername} // Do I need this?
+              onChange={this.searchGithubUsers}
+            />
+          </form>
           <button type="button" className="btn" onClick={this.getData}>
             Get Data
           </button>
@@ -48,5 +63,3 @@ class FavouriteLanguage extends Component {
 }
 
 export default FavouriteLanguage;
-
-// https://api.github.com/users/${username}/repos?per_page=100
