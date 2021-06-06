@@ -25,8 +25,8 @@ I'd like to able enter and search for a Github username
 ```
 ```
 As a user 
-so I can see what someones favourite language is
-I'd like to display the selected users favourite programming language.
+so I can find out what someones favourite programming language is
+I'd like a button to display the selected users favourite programming language.
 ```
 
 <!-- # Visit the deployed app

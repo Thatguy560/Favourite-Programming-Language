@@ -1,6 +1,7 @@
 import { Component } from "react";
 import React from "react";
 import axios from "axios";
+import sortKeysByValue from "sort-keys-by-value";
 import "./FavouriteLanguage.css";
 import { render } from "@testing-library/react";
 
@@ -9,7 +10,7 @@ class FavouriteLanguage extends Component {
     super(props);
     this.state = {
       searchedUsername: "",
-      programmingLanguages: [],
+      programmingLanguages: "",
     };
   }
 
@@ -17,20 +18,34 @@ class FavouriteLanguage extends Component {
     this.setState({ searchedUsername: event.target.value });
   };
 
-  getData = (event) => {
-    event.preventDefault();
+  getData = () => {
     let url = `https://api.github.com/users/${this.state.searchedUsername}/repos?per_page=100`;
-    console.log(url);
     axios
       .get(url)
       .then((res) => {
         const allData = res.data;
-        const programmingLanguagesUsed = allData.map((lang) => lang.language);
-        console.log(programmingLanguagesUsed);
+        var programmingLanguagesUsed = allData
+          .map((data) => data.language)
+          .filter((lang) => lang !== null);
+        this.setState({ programmingLanguages: programmingLanguagesUsed });
+        this.calculateMostUsedLanguage();
       })
       .catch((error) => {
         console.log(this.DisplayErrorInfo(error));
       });
+  };
+
+  calculateMostUsedLanguage = () => {
+    let languageFrequency = {};
+    [...this.state.programmingLanguages].forEach((lang) => {
+      if (!languageFrequency[lang]) {
+        languageFrequency[lang] = 0;
+      }
+      languageFrequency[lang]++;
+    });
+    let sortedByValue = sortKeysByValue(languageFrequency, { reverse: true });
+    console.log(sortedByValue);
+    console.log(`Favourite Language: ${Object.keys(sortedByValue)[0]}`);
   };
 
   DisplayErrorInfo = (error) => {
@@ -43,7 +58,7 @@ class FavouriteLanguage extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>What is your favourite programming language?</h1>
+          <h2>Find a user's favourite programming language</h2>
           <p>Please enter a valid Github username:</p>
           <form onSubmit={this.getData}>
             <input
@@ -53,8 +68,13 @@ class FavouriteLanguage extends Component {
               onChange={this.searchGithubUsers}
             />
           </form>
-          <button type="button" className="btn" onClick={this.getData}>
-            Get Data
+          <button
+            id="Submit"
+            type="button"
+            className="btn"
+            onClick={this.getData}
+          >
+            Submit
           </button>
         </header>
       </div>
