@@ -1,7 +1,7 @@
 import { Component } from "react";
-import React from "react";
 import axios from "axios";
 import sortKeysByValue from "sort-keys-by-value";
+import Swal from "sweetalert2";
 import "./FavouriteLanguage.css";
 import { render } from "@testing-library/react";
 
@@ -19,9 +19,9 @@ class FavouriteLanguage extends Component {
   };
 
   getData = () => {
-    let url = `https://api.github.com/users/${this.state.searchedUsername}/repos?per_page=100`;
+    let user = this.state.searchedUsername;
     axios
-      .get(url)
+      .get(`https://api.github.com/users/${user}/repos?per_page=100`)
       .then((res) => {
         const allData = res.data;
         var programmingLanguagesUsed = allData
@@ -29,6 +29,12 @@ class FavouriteLanguage extends Component {
           .filter((lang) => lang !== null);
         this.setState({ programmingLanguages: programmingLanguagesUsed });
         this.calculateMostUsedLanguage();
+        Swal.fire({
+          title: `${
+            user[0].toUpperCase() + user.slice(1)
+          }'s Favourite Programming Language`,
+          text: `${this.state.test}`,
+        });
       })
       .catch((error) => {
         console.log(this.DisplayErrorInfo(error));
@@ -44,8 +50,9 @@ class FavouriteLanguage extends Component {
       languageFrequency[lang]++;
     });
     let sortedByValue = sortKeysByValue(languageFrequency, { reverse: true });
+    let final = Object.keys(sortedByValue)[0];
     console.log(sortedByValue);
-    console.log(`Favourite Language: ${Object.keys(sortedByValue)[0]}`);
+    this.setState({ test: final });
   };
 
   DisplayErrorInfo = (error) => {

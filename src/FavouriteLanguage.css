@@ -17,3 +17,7 @@
   margin-bottom: 20px;
 }
 
+.App div.swal2-popup.swal2-modal.swal2-show {
+  width: 1000px;
+}
+
