@@ -3,7 +3,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #F0DB4F;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,11 +13,37 @@
   color: white;
 }
 
-.App input {
-  margin-bottom: 20px;
+.App div#wrap {
+  background-color: white;
+  padding: 25px;
+  border-radius: .25em;
+  border: 4px solid black;
 }
 
-.App div.swal2-popup.swal2-modal.swal2-show {
-  width: 1000px;
+.App input {
+  margin-bottom: 20px;
+  border: 2px solid black;
+  border-radius: .25em;
+
 }
+
+.App h2 {
+  font-weight: bolder;
+  color: black;
+}
+
+.App p {
+  color: black;
+}
+
+.App button#Submit.btn {
+  border: 0;
+  border-radius: .25em;
+  background-color: #7367f0;
+  color: white;
+  padding: 10px;
+  font-size: 0.75em;
+  cursor: pointer;
+}
+
 
