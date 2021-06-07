@@ -27,24 +27,17 @@ class FavouriteLanguage extends Component {
           .map((data) => data.language)
           .filter((lang) => lang !== null);
         this.setState({ programmingLanguagesUsed: allProgrammingLanguages });
-        this.calculateMostUsedLanguage();
         Swal.fire({
           title: `${
-            username[0].toUpperCase() + username.slice(1)
+            username[0].toUpperCase() + username.slice(1).toLowerCase()
           }'s Favourite Programming Language Is:`,
-          text: `${this.state.FavouriteLanguage}`,
-          width: 600,
+          text: `${this.calculateMostUsedLanguage()}`,
+          width: 625,
         });
       })
       .catch((error) => {
         Swal.fire(`${this.DisplayErrorInfo(error)}`);
       });
-  };
-
-  DisplayErrorInfo = (error) => {
-    return error.response.status === 404
-      ? "404 Github User Not Found"
-      : "Something Went Wrong";
   };
 
   calculateMostUsedLanguage = () => {
@@ -58,13 +51,17 @@ class FavouriteLanguage extends Component {
     let sortByMostUsed = sortKeysByValue(languageFrequency, { reverse: true });
     console.log(sortByMostUsed);
     let MostUsedLanguage = Object.keys(sortByMostUsed)[0];
-    let determineMessage =
-      this.state.programmingLanguagesUsed.length === 0
-        ? `${this.state.searchedUsername} doesn't have any code on any public repositories.`
-        : `${MostUsedLanguage}`;
-    this.setState({
-      FavouriteLanguage: determineMessage,
-    });
+    if (this.state.programmingLanguagesUsed.length === 0) {
+      return `${this.state.searchedUsername} doesn't have any code on any public repositories.`;
+    } else {
+      return `${MostUsedLanguage}`;
+    }
+  };
+
+  DisplayErrorInfo = (error) => {
+    return error.response.status === 404
+      ? "404 Github User Not Found"
+      : "Something Went Wrong :(";
   };
 
   render() {

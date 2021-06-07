@@ -1,4 +1,4 @@
-# Github - Favourite Programming Language (React)
+# Github - Favourite Programming Language (Made with React)
 
 <!-- To add GIF Image -->
 
@@ -20,13 +20,13 @@ You may use any programming language, framework, or library.
 
 ```
 As a user
-So I can find a particular Github user
-I'd like to able enter and search for a Github username 
+So I can find someone's Github profile
+I'd like to able enter and search for a particular Github username 
 ```
 ```
 As a user 
 so I can find out what someones favourite programming language is
-I'd like a button to display the selected users favourite programming language.
+I'd like a button which displays the selected users favourite programming language.
 ```
 
 <!-- # Visit the deployed app

@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import FavouriteLanguage from "./FavouriteLanguage";
-// import axios from "axios";
 
 ReactDOM.render(
   <React.StrictMode>
