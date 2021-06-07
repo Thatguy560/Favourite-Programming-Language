@@ -8,7 +8,7 @@
 
 **Github (API) test**
 
-We would like you to build a web or command line application,which should allow users to enter an arbitrary Github username,and be presented with a best guess of the Github user's favourite programming language. This can be computed by using the Github API to fetch all of the user's **public** Github repos, each of which includes the name of the dominant language for the repository. Documentation for the Github API can be found at https://developer.github.com/v3/
+We would like you to build a web or command line application,which should allow users to enter an arbitrary Github username,and be presented with a best guess of the Github user's favourite programming language. This can be computed by using the Github API to fetch all of the user's **public** Github repositories, each of which includes the name of the dominant language for the repository. Documentation for the Github API can be found at https://developer.github.com/v3/
 
 You may use any programming language, framework, or library.
 
