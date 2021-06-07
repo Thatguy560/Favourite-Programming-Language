@@ -27,6 +27,9 @@ I'd like a button which displays the selected users favourite programming langua
 
 # Process
 
+- I Decided to use React for ease of creating a simple web application.
+- Used Axios to fetch data back from the API and used the language frequency to determine a given users favourite programming language. I feel with more time there could be a more efficient way (perhaps using file size or number of file commits?)
+- Refactored code throughout where appropriate 
 # Installation
 
 1. Clone this repository
@@ -45,9 +48,9 @@ I'd like a button which displays the selected users favourite programming langua
 
 3. Once loaded, type in an arbitrary Github user in the input box and click submit when you're ready.
 
-<!-- # Alternatively Visit the deployed app
+# Alternatively Visit the deployed app
 
-You can find the deployed app on Heroku via the following link:  -->
+Click [here](https://favourite-programming-language.herokuapp.com/) for the deployed app on Heroku.
 # Technologies Used
 
 #### React, Javascript, HTML/CSS
