@@ -31,16 +31,19 @@ class FavouriteLanguage extends Component {
           title: `${
             username[0].toUpperCase() + username.slice(1).toLowerCase()
           }'s Favourite Programming Language Is:`,
-          text: `${this.calculateMostUsedLanguage()}`,
+          text: `${this.determineFavouriteLanguage()}`,
           width: 625,
         });
       })
       .catch((error) => {
-        Swal.fire(`${this.DisplayErrorInfo(error)}`);
+        Swal.fire({
+          title: `${this.DisplayErrorInfo(error)}`,
+          icon: "error",
+        });
       });
   };
 
-  calculateMostUsedLanguage = () => {
+  determineFavouriteLanguage = () => {
     let languageFrequency = {};
     this.state.programmingLanguagesUsed.forEach((lang) => {
       if (!languageFrequency[lang]) {
@@ -49,18 +52,25 @@ class FavouriteLanguage extends Component {
       languageFrequency[lang]++;
     });
     let sortByMostUsed = sortKeysByValue(languageFrequency, { reverse: true });
-    console.log(sortByMostUsed);
-    let MostUsedLanguage = Object.keys(sortByMostUsed)[0];
+    let sortedLangsUsedFreq = Object.values(sortByMostUsed);
+    let sortedLangsUsed = Object.keys(sortByMostUsed);
+    let maxValueFreq = sortedLangsUsedFreq[0];
+    let numOfFavLanguages =
+      sortedLangsUsedFreq.lastIndexOf(maxValueFreq) -
+      sortedLangsUsedFreq.indexOf(maxValueFreq) +
+      1;
     if (this.state.programmingLanguagesUsed.length === 0) {
       return `${this.state.searchedUsername} doesn't have any code on any public repositories.`;
+    } else if (numOfFavLanguages > 1) {
+      return `${sortedLangsUsed.slice(0, numOfFavLanguages).join(" or ")}`;
     } else {
-      return `${MostUsedLanguage}`;
+      return `${sortedLangsUsed[0]}`;
     }
   };
 
   DisplayErrorInfo = (error) => {
     return error.response.status === 404
-      ? "404 Github User Not Found"
+      ? "<404 Error> Github User Not Found"
       : "Something Went Wrong :(";
   };
 

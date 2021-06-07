@@ -9,7 +9,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  /* flex-direction: column; */
 }
 
 .App div#wrap {
@@ -56,7 +55,3 @@
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-
-
-
-
