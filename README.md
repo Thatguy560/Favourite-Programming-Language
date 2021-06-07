@@ -1,7 +1,7 @@
 # Github - Favourite Programming Language (Made with React)
 
 <p align="center">
-  <img src="DemoOfApp.gif" alt="animated" />
+  <img src="./public/DemoOfApp.gif" alt="animated" />
 </p>
 
 # The Challenge
@@ -25,11 +25,13 @@ so I can find out what someones favourite programming language is
 I'd like a button which displays the selected users favourite programming language(s).
 ```
 
-# Process
+# Process/Thoughts
 
 - I Decided to use React for ease of creating a simple web application.
 - Used Axios to fetch data back from the API and used the language frequency to determine a given users favourite programming language. I feel with more time there could be a more efficient way (perhaps using file size or number of file commits?)
 - Refactored code throughout where appropriate 
+- Possibly more opportunities to refactor my code further.
+- Write more React tests (I'm quite new to React testing)
 # Installation
 
 1. Clone this repository

@@ -2,7 +2,9 @@ import { Component } from "react";
 import axios from "axios";
 import sortKeysByValue from "sort-keys-by-value";
 import Swal from "sweetalert2";
-import "./FavouriteLanguage.css";
+import "./css/FavouriteLanguage.css";
+
+// "./src/css/FavouriteLanguage.css"
 // import { render } from "@testing-library/react";
 
 class FavouriteLanguage extends Component {
@@ -68,8 +70,8 @@ class FavouriteLanguage extends Component {
     }
   };
 
-  DisplayErrorInfo = (error) => {
-    return error.response.status === 404
+  DisplayErrorInfo = (HTTP) => {
+    return HTTP.response.status === 404 // if HTTP response status is
       ? "<404 Error> Github User Not Found"
       : "Something Went Wrong :(";
   };
