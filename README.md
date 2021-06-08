@@ -25,12 +25,12 @@ so I can find out what someones favourite programming language is
 I'd like a button which displays the selected users favourite programming language(s).
 ```
 
-# Process/Thoughts
+# My Process & Thoughts
 
 - I Decided to use React for ease of creating a simple web application.
 - Used Axios to fetch data back from the API and used the language frequency to determine a given users favourite programming language. I feel with more time there could be a more efficient way (perhaps using file size or number of file commits?)
 - Refactored code throughout where appropriate 
-- Possibly more opportunities to refactor my code further.
+- I feel there's possibly more opportunities to refactor my code further.
 - Write more React tests (I'm quite new to React testing)
 # Installation
 
@@ -49,6 +49,8 @@ I'd like a button which displays the selected users favourite programming langua
 2. This should then automatically open the app on your browser, however if it doesn't just open up any browser of your choosing and type in the url "http://localhost:3000/".
 
 3. Once loaded, type in an arbitrary Github user in the input box and click submit when you're ready.
+
+4. If you want to run tests, type "npm test" in the command line from the root directory. 
 
 # Alternatively Visit the deployed app
 

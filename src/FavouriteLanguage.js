@@ -14,15 +14,16 @@ class FavouriteLanguage extends Component {
   }
 
   searchGithubUsers = (event) => {
-    this.setState({ searchedUsername: event.target.value }); // Set this.state.searchedUsername to whatever user info is passed into the input box.
+    this.setState({ searchedUsername: event.target.value });
   };
 
-  getData = () => {
-    let username = this.state.searchedUsername;
-    axios // Use Axios to make a fetch request and passes in provided username to get relevant data
+  getData = (e) => {
+    e.preventDefault();
+    const username = this.state.searchedUsername;
+    axios
       .get(`https://api.github.com/users/${username}/repos?per_page=100`)
       .then((res) => {
-        let allProgrammingLanguages = res.data
+        const allProgrammingLanguages = res.data
           .map((data) => data.language)
           .filter((lang) => lang !== null);
         this.setState({ programmingLanguagesUsed: allProgrammingLanguages });
@@ -50,20 +51,22 @@ class FavouriteLanguage extends Component {
       }
       languageFrequency[lang]++;
     });
-    let sortByMostUsed = sortKeysByValue(languageFrequency, { reverse: true });
-    let sortedLangsUsedFreq = Object.values(sortByMostUsed);
-    let sortedLangsUsed = Object.keys(sortByMostUsed);
-    let maxValueFreq = sortedLangsUsedFreq[0];
-    let numOfFavLanguages = sortedLangsUsedFreq.lastIndexOf(maxValueFreq) + 1; // if user hasn't used any programming languages return "doesn't have any code" else return favourite programming language(s) used.
+    const sortByMostUsed = sortKeysByValue(languageFrequency, {
+      reverse: true,
+    });
+    const sortedLangsUsedFreq = Object.values(sortByMostUsed);
+    const sortedLangsUsed = Object.keys(sortByMostUsed);
+    const maxValueFreq = sortedLangsUsedFreq[0];
+    const numOfFavLanguages = sortedLangsUsedFreq.lastIndexOf(maxValueFreq) + 1;
     if (this.state.programmingLanguagesUsed.length === 0) {
       return `${this.state.searchedUsername} doesn't have any code on any public repositories.`;
     } else {
-      return `${sortedLangsUsed.slice(0, numOfFavLanguages).join(" or ")}`; // Takes sorted languages, slices based on languages used, e.g. if user has used Ruby or JS equal number of times it will return both.
+      return `${sortedLangsUsed.slice(0, numOfFavLanguages).join(" or ")}`; // Takes sorted languages array and slices based on languages used, e.g. if user has used Ruby or JS equal number of times it will return both.
     }
   };
 
   DisplayErrorInfo = (HTTP) => {
-    return HTTP.response.status === 404 // if HTTP response status is 404 then return page not found error else return any other client or server errors.
+    return HTTP.response.status === 404
       ? "<404 Error> Github User Not Found"
       : "Something Went Wrong :(";
   };
@@ -77,19 +80,22 @@ class FavouriteLanguage extends Component {
             <p>Please enter a valid Github username:</p>
             <form onSubmit={this.getData}>
               <input
+                data-testid="Username"
                 type="text"
                 placeholder="Github username..."
                 onChange={this.searchGithubUsers}
               />
+              <br />
+              <button
+                id="Submit"
+                data-testid="Submit"
+                type="button"
+                className="btn"
+                onClick={this.getData}
+              >
+                Submit
+              </button>
             </form>
-            <button
-              id="Submit"
-              type="button"
-              className="btn"
-              onClick={this.getData}
-            >
-              Submit
-            </button>
           </div>
         </header>
       </div>
