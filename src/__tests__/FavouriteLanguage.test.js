@@ -53,8 +53,8 @@ describe("FavouriteLanguage", () => {
 
     await waitFor(() => {
       expect(Swal.fire).toHaveBeenCalledWith({
-        text: "Javascript",
         title: "Example-user-name's Favourite Programming Language Is:",
+        text: "Javascript",
         width: 625,
       });
     });

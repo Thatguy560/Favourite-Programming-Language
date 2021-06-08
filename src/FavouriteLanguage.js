@@ -61,7 +61,7 @@ class FavouriteLanguage extends Component {
     if (this.state.programmingLanguagesUsed.length === 0) {
       return `${this.state.searchedUsername} doesn't have any code on any public repositories.`;
     } else {
-      return `${sortedLangsUsed.slice(0, numOfFavLanguages).join(" or ")}`; // Takes sorted languages array and slices based on languages used, e.g. if user has used Ruby or JS equal number of times it will return both.
+      return `${sortedLangsUsed.slice(0, numOfFavLanguages).join(" or ")}`;
     }
   };
 
