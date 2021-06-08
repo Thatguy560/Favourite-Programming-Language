@@ -16,7 +16,6 @@ describe("FavouriteLanguage", () => {
 
   it("Submit button should make a fetch request return a given Github user.", () => {
     render(<FavouriteLanguage />);
-    jest.mock("axios");
     let mock = new MockAdapter(axios);
     userEvent.click(screen.getByText("Submit"));
     const searchGithubUsers = mock.onGet(
@@ -26,6 +25,3 @@ describe("FavouriteLanguage", () => {
     expect(searchGithubUsers).toHaveBeenCalled();
   });
 });
-
-// https://api.github.com/users/thatguy560/repos?per_page=100
-// `https://api.github.com/users/${username}/repos?per_page=100`

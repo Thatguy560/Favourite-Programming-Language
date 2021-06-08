@@ -13,9 +13,10 @@
 
 .App div#wrap {
   background-color: white;
+  border: 4px solid black;
+  box-shadow: 0 9px black;
   padding: 25px;
   border-radius: .25em;
-  border: 4px solid black;
 }
 
 .App input {

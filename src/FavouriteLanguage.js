@@ -4,9 +4,6 @@ import sortKeysByValue from "sort-keys-by-value";
 import Swal from "sweetalert2";
 import "./css/FavouriteLanguage.css";
 
-// "./src/css/FavouriteLanguage.css"
-// import { render } from "@testing-library/react";
-
 class FavouriteLanguage extends Component {
   constructor(props) {
     super(props);
@@ -17,12 +14,12 @@ class FavouriteLanguage extends Component {
   }
 
   searchGithubUsers = (event) => {
-    this.setState({ searchedUsername: event.target.value });
+    this.setState({ searchedUsername: event.target.value }); // Set this.state.searchedUsername to whatever user info is passed into the input box.
   };
 
   getData = () => {
     let username = this.state.searchedUsername;
-    axios
+    axios // Use Axios to make a fetch request and passes in provided username to get relevant data
       .get(`https://api.github.com/users/${username}/repos?per_page=100`)
       .then((res) => {
         let allProgrammingLanguages = res.data
@@ -57,21 +54,16 @@ class FavouriteLanguage extends Component {
     let sortedLangsUsedFreq = Object.values(sortByMostUsed);
     let sortedLangsUsed = Object.keys(sortByMostUsed);
     let maxValueFreq = sortedLangsUsedFreq[0];
-    let numOfFavLanguages =
-      sortedLangsUsedFreq.lastIndexOf(maxValueFreq) -
-      sortedLangsUsedFreq.indexOf(maxValueFreq) +
-      1;
+    let numOfFavLanguages = sortedLangsUsedFreq.lastIndexOf(maxValueFreq) + 1; // if user hasn't used any programming languages return "doesn't have any code" else return favourite programming language(s) used.
     if (this.state.programmingLanguagesUsed.length === 0) {
       return `${this.state.searchedUsername} doesn't have any code on any public repositories.`;
-    } else if (numOfFavLanguages > 1) {
-      return `${sortedLangsUsed.slice(0, numOfFavLanguages).join(" or ")}`;
     } else {
-      return `${sortedLangsUsed[0]}`;
+      return `${sortedLangsUsed.slice(0, numOfFavLanguages).join(" or ")}`; // Takes sorted languages, slices based on languages used, e.g. if user has used Ruby or JS equal number of times it will return both.
     }
   };
 
   DisplayErrorInfo = (HTTP) => {
-    return HTTP.response.status === 404 // if HTTP response status is
+    return HTTP.response.status === 404 // if HTTP response status is 404 then return page not found error else return any other client or server errors.
       ? "<404 Error> Github User Not Found"
       : "Something Went Wrong :(";
   };
