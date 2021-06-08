@@ -25,3 +25,7 @@ describe("FavouriteLanguage", () => {
     expect(searchGithubUsers).toHaveBeenCalled();
   });
 });
+
+// jest.mock("axios");
+// https://api.github.com/users/thatguy560/repos?per_page=100
+// `https://api.github.com/users/${username}/repos?per_page=100`
