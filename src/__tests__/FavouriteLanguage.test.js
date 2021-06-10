@@ -14,6 +14,8 @@ mockAxios
   .onGet(API_URL)
   .replyOnce(404)
   .onGet(API_URL)
+  .replyOnce(503)
+  .onGet(API_URL)
   .reply(200, [{ language: "Javascript" }]);
 
 beforeEach(() => {
@@ -33,7 +35,7 @@ describe("FavouriteLanguage", () => {
     expect(linkElement).toBeInTheDocument();
   });
 
-  it("Fails to make an API request to retrieve a github user and displays a sweet alert error", async () => {
+  it("Fails to make an API request to retrieve a github user if the user doesn't exist and displays a 404 error.", async () => {
     render(<FavouriteLanguage />);
     userEvent.type(screen.getByTestId("Username"), username);
     userEvent.click(screen.getByTestId("Submit"));
@@ -41,6 +43,19 @@ describe("FavouriteLanguage", () => {
     await waitFor(() => {
       expect(Swal.fire).toHaveBeenCalledWith({
         title: "<404 Error> Github User Not Found",
+        icon: "error",
+      });
+    });
+  });
+
+  it("Fails to make an API request if there's any other HTTP response errors and will display 'Something Went Wrong'.", async () => {
+    render(<FavouriteLanguage />);
+    userEvent.type(screen.getByTestId("Username"), username);
+    userEvent.click(screen.getByTestId("Submit"));
+
+    await waitFor(() => {
+      expect(Swal.fire).toHaveBeenCalledWith({
+        title: "Something Went Wrong :(",
         icon: "error",
       });
     });
