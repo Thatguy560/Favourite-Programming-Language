@@ -50,7 +50,7 @@ I'd like a button which displays the selected users favourite programming langua
 
 3. Once loaded, type in an arbitrary Github user in the input box and click submit when you're ready.
 
-4. If you want to run tests and see coverage, type "npm test" in the command line from the root directory. 
+4. If you want to run tests, type "npm test" in the command line from the root directory and if you want to see test coverage type "npm run test:coverage". 
 
 <img src="./public/Screenshot 2021-06-10 at 15.55.48.png"/>
 
