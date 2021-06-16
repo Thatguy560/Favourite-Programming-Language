@@ -12,15 +12,17 @@ class FavouriteLanguage extends Component {
       programmingLanguagesUsed: "",
     };
   }
-
+  // target gets the element that triggered a specific event and
+  // value returns the value attribute of that element.
   searchGithubUsers = (event) => {
     this.setState({ searchedUsername: event.target.value });
   };
 
+  // Move axios request into it's own function
   getData = (e) => {
     e.preventDefault();
     const username = this.state.searchedUsername;
-    axios
+    axios // Used 100 as Results per page is max 100
       .get(`https://api.github.com/users/${username}/repos?per_page=100`)
       .then((res) => {
         const allProgrammingLanguages = res.data
@@ -47,8 +49,9 @@ class FavouriteLanguage extends Component {
     let languageFrequency = {};
     this.state.programmingLanguagesUsed.forEach((lang) => {
       if (!languageFrequency[lang]) {
+        // relational operator meaning NOT. If language doesn't exist set to 0.
         languageFrequency[lang] = 0;
-      }
+      } // else increment the language frequency by 1 if it does.
       languageFrequency[lang]++;
     });
     const sortByMostUsed = sortKeysByValue(languageFrequency, {
@@ -56,8 +59,8 @@ class FavouriteLanguage extends Component {
     });
     const sortedLangsUsedFreq = Object.values(sortByMostUsed);
     const sortedLangsUsed = Object.keys(sortByMostUsed);
-    const maxValueFreq = sortedLangsUsedFreq[0];
-    const numOfFavLanguages = sortedLangsUsedFreq.lastIndexOf(maxValueFreq) + 1;
+    const mostUsed = sortedLangsUsedFreq[0];
+    const numOfFavLanguages = sortedLangsUsedFreq.lastIndexOf(mostUsed) + 1;
     if (this.state.programmingLanguagesUsed.length === 0) {
       return `${this.state.searchedUsername} doesn't have any code on any public repositories.`;
     } else {
